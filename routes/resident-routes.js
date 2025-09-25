@@ -8,7 +8,7 @@ routes.post("/register_resident", async (req, res) => {
         const result = await add_resident(name, dob, gender, room_number, admission_date, phone_number, email, citizen_identification_card);
         res.status(201).send({
             status: true,
-            message: result.message,
+            message: "Đăng ký cư dân thành công",
             data: result,
         });
     } catch (err) {
@@ -24,7 +24,7 @@ routes.get("/all_resident", async (req, res) => {
         const result = await getAllResident();
         res.status(200).send({
             status: true,
-            message: "Lấy danh sách cư dân thành công",
+            message: "Lấy danh sách tất cả cư dân thành công",
             data: result
         });
     } catch (err) {
@@ -35,13 +35,13 @@ routes.get("/all_resident", async (req, res) => {
     }
 })
 
-routes.post("/find_resident", async (req, res) => {
+routes.get("/find_resident", async (req, res) => {
     try {
         const { citizen_identification_card } = req.body;
         const result = await find_resident(citizen_identification_card);
         res.status(201).send({
             status: true,
-            message: result.message,
+            message: "Lấy danh sách cư dân thành công",
             data: result,
         });
     } catch (err) {
@@ -51,3 +51,5 @@ routes.post("/find_resident", async (req, res) => {
         });
     }
 })
+
+module.exports = routes;

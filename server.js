@@ -11,6 +11,7 @@ app.use(cors({
 }))
 
 app.use("/api/auth", require("./routes/user-routes"));
+
 app.use("/api/resident", require("./routes/resident-routes"));
 
 connectDB().then(() => {
