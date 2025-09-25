@@ -1,9 +1,9 @@
 const express = require('express');
 const cors = require("cors");
 require("dotenv").config();
+const { sequelize, connectDB } = require('./Config/database');
 
-const create_table=require("./database/create_table");
-const user_routes=require("./routes/user_routes");
+// const create_table=require("./database/create_table");
 const app=express();
 app.use(express.json());
 app.use(cors({
@@ -11,6 +11,17 @@ app.use(cors({
     methods: ["GET","POST","PUT","PATCH","DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }))
-create_table();
-app.use("/api/auth",user_routes);
-app.listen(process.env.POST,process.env.HOST,()=>console.log(`Server đang chạy tại http://${process.env.HOST}:${process.env.POST}`));
+// create_table();
+
+app.use("/api/auth", require("./routes/user-routes"));
+
+connectDB().then(() => {
+  sequelize.sync({ alter: true })
+    .then(() => console.log('✅ Đã đồng bộ database'))
+    .catch(err => console.error('❌ Có lỗi khi đồng bộ database:', err));
+
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {  
+    console.log(`🚀 Server is running on port ${PORT}`);
+  });
+});
