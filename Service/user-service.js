@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const User = require("../Model/user");
 const Resident = require("../Model/resident");
 const bcrypt = require("bcrypt");
-const { where } = require('sequelize');
 
 async function login_user(username, password) {
   try {

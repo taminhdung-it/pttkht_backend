@@ -2,8 +2,6 @@ const express = require('express');
 const cors = require("cors");
 require("dotenv").config();
 const { sequelize, connectDB } = require('./Config/database');
-// const create_table=require("./database/create_table");
-
 const app=express();
 app.use(express.json());
 app.use(cors({
@@ -11,7 +9,6 @@ app.use(cors({
     methods: ["GET","POST","PUT","PATCH","DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }))
-// create_table();
 
 app.use("/api/auth", require("./routes/user-routes"));
 
