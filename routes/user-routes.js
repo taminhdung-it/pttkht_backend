@@ -71,4 +71,5 @@ routes.post("/find_resident",async (req,res)=>{
         });
     }
 })
+
 module.exports = routes;
